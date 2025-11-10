@@ -1,0 +1,5 @@
+model Test {
+    id String @id @default(uuid())
+    message String
+    numberMessage Int?
+}

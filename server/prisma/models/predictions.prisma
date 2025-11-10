@@ -1,0 +1,24 @@
+
+model ComputedPrediction {
+  modelVersion String
+  sqft Int
+  bedrooms Int
+  price Int
+
+  transactions PredictionTransaction[]
+
+  @@id(name: "computed_prediction_pk", fields: [sqft, bedrooms, modelVersion])
+}
+
+
+model PredictionTransaction {
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  predictionSqft Int
+  predictionBedrooms Int
+  predictionModelVersion String
+
+  prediction ComputedPrediction @relation(fields: [predictionSqft, predictionBedrooms, predictionModelVersion], references: [sqft, bedrooms, modelVersion])
+}
+
